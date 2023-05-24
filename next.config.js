@@ -1,4 +1,18 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {}
+let assetPrefix = "";
+let basePath = "/";
 
-module.exports = nextConfig
+if (process.env.GITHUB_REPOSITORY) {
+  const repo = process.env.GITHUB_REPOSITORY.replace(/.*?\//, "");
+
+  assetPrefix = `/${repo}/`;
+  basePath = `/${repo}`;
+}
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: "export",
+  assetPrefix: assetPrefix,
+  basePath: basePath,
+};
+
+module.exports = nextConfig;
